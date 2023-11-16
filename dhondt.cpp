@@ -1,7 +1,7 @@
 #include "dhondt.h"
 
-void set_party( Party &party, const char name[NAME_CAPACITY], const double votes ){
-    std::memcpy( (void *)party.name, name, NAME_CAPACITY);
+void set_party( Party &party, const char name[PARTY_NAME_CAPACITY], const double votes ){
+    std::memcpy( (void *)party.name, name, PARTY_NAME_CAPACITY);
     party.votes = votes;
     party.quoc = votes;
     party.seats = 0;
@@ -24,7 +24,7 @@ void calc(Party* parties, uint8_t len, uint16_t total_seats ){
         }
 
         parties[larg_idx].seats++;
-        parties[larg_idx].quoc = parties[larg_idx].quoc / (double)(parties[larg_idx].seats + 1);
+        parties[larg_idx].quoc = parties[larg_idx].votes / (double)(parties[larg_idx].seats + 1);
     }
 
 }

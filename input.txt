@@ -1,11 +1,11 @@
 48
 ----THIS LINE IS IGNORED----
-PS      |   482_606
-PSD     |   285_522
-IL      |   93_341
-CHEGA   |   91_889
-CDU     |   59_995
-BE      |   55_786
-LIVRE   |   28_834
-PAN     |   23_577
-CDS     |   19_524
+PS      482_606
+PSD     285_522
+IL      93_341
+CHEGA   91_889
+CDU     59_995
+BE      55_7_86
+LIVRE   _28_834
+PAN     23577
+CDS     19524

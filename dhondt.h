@@ -4,15 +4,15 @@
 #include <cstring>
 #endif
 
-#define NAME_CAPACITY 15
+#define PARTY_NAME_CAPACITY (15+1)
 
 struct Party{
-    const char name[NAME_CAPACITY] = {};
+    const char name[PARTY_NAME_CAPACITY] = {};
     double votes;
     double quoc;
     uint16_t seats;
 };
 
-void set_party( Party &party, const char * const name, const double votes );
+void set_party( Party &party, const char name[PARTY_NAME_CAPACITY], const double votes );
 
 void calc(Party* parties, uint8_t len, uint16_t total_seats );
