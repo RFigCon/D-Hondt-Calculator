@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-#define FILE_NAME "input.txt"
 #define MAX_PARTIES 25
 
 enum ErrorStatus{
@@ -108,8 +107,8 @@ ErrorStatus get_party(Party &p, std::ifstream &file){
     return NONE;
 }
 
-ErrorStatus fill_from_file(Party *parties, uint8_t &len, uint16_t &total_seats){
-    std::ifstream file(FILE_NAME);
+ErrorStatus fill_from_file(char* file_name, Party *parties, uint8_t &len, uint16_t &total_seats){
+    std::ifstream file(file_name);
 
     if(!file.is_open()) return OPEN;
 
@@ -165,13 +164,21 @@ void show_results(const Party * const parties, const uint8_t len, const uint16_t
     }
 }
 
-int main(){
+int main(int argc, char *args[]){
     
     uint8_t len;
     uint16_t total_seats;
     Party parties[MAX_PARTIES];
 
-    ErrorStatus status = fill_from_file(parties, len, total_seats);
+    ErrorStatus status;
+    if(argc > 1){
+        status = fill_from_file(args[1], parties, len, total_seats);
+    }else{
+        std::cout << "Must pass file as argument; e.g:" << std::endl;
+        std::cout << "\t> dhondt input.txt " << std::endl;
+        return 1;
+    }
+    
 
     if(status!=ErrorStatus::NONE){
         handle_error(status);
