@@ -89,21 +89,35 @@ ErrorStatus get_party(Party &p, std::ifstream &file){
         return FILE_FORMAT;
     }
 
-    double number = 0.0; 
+    double number = 0.0;
+    double mant = 0.0;
+    bool decimal = false;
 
-    //TODO: Aceitar floats (ex. "27.3" ou "22,8")
     while( !file.eof() && c != '\n' && !is_whitespace(c) ) {
         if(c=='_') goto next;
+        if(!decimal && (c=='.' || c==',') ){
+            decimal = true;
+            goto next;
+        }
         if(c<'0' || c>'9') return INVALID_NUMBER;
 
-        number *= 10;
-        number += (double)(c-'0');
+        if(decimal){
+            mant *= 10;
+            mant += (double)(c-'0');
+        }else{
+            number *= 10;
+            number += (double)(c-'0');
+        }
 
         next:
         c = file.get();
     }
 
-    set_party(p, name, number);
+    while(mant > 1.0){
+        mant /= 10;
+    }
+
+    set_party(p, name, number + mant);
     return NONE;
 }
 
